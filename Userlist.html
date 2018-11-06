@@ -1,0 +1,61 @@
+<div class="user-disp-list-outer-div" ng-controller="userListCntrl">
+
+    <div class="topBox">
+    
+    <input type="text" ng-model="searchText" placeholder="Search Text"/>
+    
+    Items per page<select ng-model="pageSize" id="pageSize" class="pagination-size" ng-change="valueChanged()">
+    
+            <option value="5">5</option>
+    
+            <option value="10">10</option>
+    
+            <option value="15">15</option>
+    
+            <option value="20">20</option>
+    
+            <option value="25">25</option>
+    
+             <option value="30">30</option>
+    
+         </select>
+    
+         <br/>
+    
+    </div>
+    
+     
+    
+    <div class="dispTableDiv">
+    
+    <table  class="dispTable" id="dispTable-userlist">
+    
+    <tr class="dispTableHead"><th class="tablerow" ng-repeat="thName in userHeadders">{{thName.name}}</th></tr>
+    
+      <tr class="dispTableRow" ng-repeat="employee in data|filter:searchText|limitTo : pageSize : tableStartIndex"><td class="tablerow">{{employee.slno}}</td><td class="tablerow">{{employee.id}}</td><td class="tablerow">{{employee.name}}</td><td class="tablerow">{{employee.role}}</td><td class="tablerow">{{employee.supervisor}}</td><td class="tablerow">{{employee.email}}</td><td class="tablerow">{{employee.phone}}</td><td class="tablerow">{{employee.status}}</td></tr>
+    
+    </table>
+    
+    </div>
+    
+    <br/>
+    
+      <ul class="pagination">
+    
+            <li><a href="" ng-click="firstPage()">First</a></li>
+    
+        <li><a href="" ng-click="previousPage()"> << </a></li>
+    
+         <li ng-repeat="page in pages|limitTo : pageCount : startIndex">
+    
+               <a href="" ng-click="loadToThisPage(page)">{{page}}</a></li>
+    
+            </li>
+    
+        <li><a href=""  ng-click="nextPage()"> >> </a></li>
+    
+         <li><a href="" ng-click="lastPage()">Last</a></li>
+    
+      </ul>
+    
+    </div>

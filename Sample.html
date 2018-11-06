@@ -1,0 +1,123 @@
+<html ng-app="myApp">
+
+<head>
+
+<style>
+
+ul.pagination {
+
+    display: inline-block;
+
+    padding: 0;
+
+    margin: 0;
+
+}
+
+ 
+
+ul.pagination li {display: inline;}
+
+ 
+
+ul.pagination li a {
+
+    color: black;
+
+    float: left;
+
+    padding: 8px 16px;
+
+    text-decoration: none;
+
+    transition: background-color .3s;
+
+    border: 1px solid #ddd;
+
+}
+
+ 
+
+ul.pagination li a.active {
+
+    background-color: #4CAF50;
+
+    color: white;
+
+    border: 1px solid #4CAF50;
+
+}
+
+ 
+
+ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+
+ 
+
+div.center {text-align: center;}
+
+</style>
+
+ 
+
+<script src="lib/angular/1.5.8/angular.js"></script>
+
+<script src="js/test.js"></script>
+
+</head>
+
+<body ng-controller="MyCtrl">
+
+ 
+
+<div class="center">
+
+<input type="text" ng-model="searchText"/>
+
+Items per page<select ng-model="pageSize" id="pageSize" class="pagination-size" ng-change="valueChanged()">
+
+        <option value="5">5</option>
+
+        <option value="10">10</option>
+
+        <option value="15">15</option>
+
+        <option value="20">20</option>
+
+        <option value="25">25</option>
+
+         <option value="30">30</option>
+
+     </select>
+
+<table border="1">
+
+  <tr><th>Id</th><th>Name</th><th>Age</th></tr>
+
+  <tr ng-repeat="employee in data|filter:searchText|limitTo : pageSize : tableStartIndex"><th>{{employee.id}}</th><th>{{employee.name}}</th><th>{{employee.age}}</th></tr>
+
+</table>
+
+  <ul class="pagination">
+
+        <li><a href="" ng-click="firstPage()">First</a></li>
+
+    <li><a href="" ng-click="previousPage()">«</a></li>
+
+     <li ng-repeat="page in pages|limitTo : pageCount : startIndex">
+
+           <a href="" ng-click="loadToThisPage(page)">{{page}}</a></li>
+
+        </li>
+
+    <li><a href=""  ng-click="nextPage()">»</a></li>
+
+     <li><a href="" ng-click="lastPage()">Last</a></li>
+
+  </ul>
+
+</div>
+
+</body>
+
+</html>
